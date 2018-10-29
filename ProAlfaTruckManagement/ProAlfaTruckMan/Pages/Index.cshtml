@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+@{
+    string pwdtitle = "<label>" + @Loc["Password"].Value + "<a href=\"/PasswordRecovery" + AppCulture.UrlCultureSuffix + "\" class=\"rLink\" tabindex=\"6\">" + @Loc["Forgot your password?"].Value + "</a></label>";
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                <label>
+                    @Loc["Name"]
+                    <a href="?culture=en-GB" class="rLink">EN</a>
+                    <a href="?culture=pl-PL" class="rLink">PL</a>
+                    <a href="?culture=cs-CZ" class="rLink">CZ</a>
+                    <a href="?culture=sk-SK" class="rLink">SK</a>
+                </label>
+                <input type="text" asp-for="LoginCreds.Name" tabindex="1" autofocus>
+                <span asp-validation-for="@Model.LoginCreds.Name"></span>
+                @Html.Raw(pwdtitle)
+                <input type="password" asp-for="LoginCreds.Password" tabindex="2">
+                <span asp-validation-for="@Model.LoginCreds.Password"></span>
+            </fieldset>
+            <footer>
+                <input type="submit" name="btnlogin" class="btnLogin" asp-page-handler="OK" value=@Loc["Login"] tabindex="5">
+            </footer>
+        </form>
+    </div>
+</div>

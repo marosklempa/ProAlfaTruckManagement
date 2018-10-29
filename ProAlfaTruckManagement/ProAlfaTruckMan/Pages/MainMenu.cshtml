@@ -1,0 +1,52 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@model MainMenuModel
+@{
+    Layout = "~/Pages/_Layout_MainMenu.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+@{
+    string reservation = "<a style=\"color: rgb(255, 255, 255)\" href=\"/Reservation" + AppCulture.UrlCultureSuffix + "\">";
+    reservation = reservation + "    <div class=\"foo blue\" style=\"display: table;\">";
+    reservation = reservation + "        <div style=\"display: table-cell; vertical-align: bottom;\">";
+    reservation = reservation + "            <label class=\"TileTitle\">" + @Loc["Reservation"].Value + "</label>";
+    reservation = reservation + "        </div>";
+    reservation = reservation + "    </div>";
+    reservation = reservation + "</a>";
+
+    string reports = "<a style=\"color: rgb(255, 255, 255)\" href=\"/UnloadsList" + AppCulture.UrlCultureSuffix + "\">";
+    reports = reports + "    <div class=\"foo purple\" style=\"display: table;\">";
+    reports = reports + "        <div style=\"display: table-cell; vertical-align: bottom;\">";
+    reports = reports + "            <label class=\"TileTitle\">" + @Loc["Reports"].Value + "</label>";
+    reports = reports + "        </div>";
+    reports = reports + "    </div>";
+    reports = reports + "</a>";
+
+    string logout = "<a style=\"color: rgb(255, 255, 255)\" href=\"/Logout" + AppCulture.UrlCultureSuffix + "\">";
+    logout = logout + "    <div class=\"foo wine\" style=\"display: table;\">";
+    logout = logout + "        <div style=\"display: table-cell; vertical-align: bottom;\">";
+    logout = logout + "            <label class=\"TileTitle\">" + @Loc["Logout"].Value + "</label>";
+    logout = logout + "        </div>";
+    logout = logout + "    </div>";
+    logout = logout + "</a>";
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                @Html.Raw(@reservation)
+                @Html.Raw(@reports)
+                @Html.Raw(@logout)
+            </fieldset>
+            <footer>
+                <label>@Model.PersInfo.Text</label>
+            </footer>
+        </form>
+    </div>
+</div>

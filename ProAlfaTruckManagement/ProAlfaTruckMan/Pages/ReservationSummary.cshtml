@@ -1,0 +1,58 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model ReservationSummaryModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Pages/_Layout_ReservationSummary.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                <label style="font-size: large; font-weight: bold">@Loc["Reservation Summary"]</label>
+                <label style="font-size:small">@Loc["You sucessfully reserved truck unload. Please remark following date and time of your unload."]</label>
+                <br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>@Loc["Unload number"]</label>
+                                    <input type="number" asp-for="ResSummData.Rowid" tabindex="1" disabled>
+                                    <label>@Loc["Unload start"]</label>
+                                    <input type="text" asp-for="ResSummData.DateStart" tabindex="2" style="width: 115px" disabled>
+                                </div>
+                            </td>
+                            <td width="20px"></td>
+                            <td>
+                                <div>
+                                    <label>@Loc["Palette quantity"]</label>
+                                    <input type="number" asp-for="ResSummData.PalQnty" tabindex="4" disabled>
+                                    <label>@Loc["Unload end"]</label>
+                                    <input type="text" asp-for="ResSummData.DateEnd" tabindex="3" style="width: 115px" disabled>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label>@Loc["Ramp"]</label>
+                <input type="text" asp-for="ResSummData.Ramp" style="width: 275px" tabindex="5" disabled>
+                <label>@Loc["Remark"]</label>
+                <textarea asp-for="ResSummData.Remark" tabindex="6" style="width: 275px; height: 40px; resize:none" disabled></textarea>
+                <br />
+                <input type="submit" name="btnOk" class="btnOK" asp-page-handler="OK" style="float: right;" value=@Loc["OK"] tabindex="7">
+            </fieldset>
+            <footer>
+                <label>@Model.ResSummData.Text</label>
+            </footer>
+        </form>
+    </div>
+</div>

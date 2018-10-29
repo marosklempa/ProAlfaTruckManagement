@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UnloadsListModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Pages/_Layout_UnloadsList.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST" onsubmit="btnClose.disabled=true; return true;">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                <label style="font-size: large; font-weight: bold">@Loc["Planned truck unloads"]</label>
+                <br />
+                <div class="table100 ver4 m-b-15">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1" width="25%" align="left">@Loc["Date"]</th>
+                                    <th class="cell100 column2" width="35%" align="left">@Loc["Time"]</th>
+                                    <th class="cell100 column3" width="20%" align="left">&nbsp;</th>
+                                    <th class="cell100 column4" width="20%" align="left">&nbsp;</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table100-body">
+                        <table>
+                            <tbody>
+                                @foreach (var item in Model.Unlds)
+                                {
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1" width="25%" align="left">@Html.DisplayFor(modelItem => item.Datefrom2)</td>
+                                        <td class="cell100 column2" width="35%" align="left">@Html.DisplayFor(modelItem => item.TimeFromTo)</td>
+                                        @Html.Raw("<td class=\"cell100 column3\" width=\"20%\" align=\"left\"><a href=\"/UnloadEdit" + @AppCulture.UrlCultureSuffix + "&amp;mode=view&amp;rowid=" + @item.Rowid + "&amp;pgidx=" + @Model.PageIndex + "\">" + @Loc["Details"].Value + "</a></td>")
+                                        @Html.Raw("<td class=\"cell100 column3\" width=\"20%\" align=\"left\"><a href=\"/UnloadEdit" + @AppCulture.UrlCultureSuffix + "&amp;mode=delete&amp;rowid=" + @item.Rowid + "&amp;pgidx=" + @Model.PageIndex + "\">" + @Loc["Delete"].Value + "</a></td>")
+                                        @*<td class="cell100 column3" width="20%" align="left"><a asp-page="./UnloadEdit" asp-route-mode="view" asp-route-rowid="@item.Rowid" asp-route-pgidx="@Model.PageIndex">@Loc["Details"]</a></td>
+                                <td class="cell100 column4" width="20%" align="left"><a asp-page="./UnloadEdit" asp-route-mode="delete" asp-route-rowid="@item.Rowid" asp-route-pgidx="@Model.PageIndex">@Loc["Delete"]</a></td>*@
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+                @{
+                    string prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    string nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+                <a asp-page="./UnloadsList" asp-route-culture="@AppCulture.Name" asp-route-pgidx="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled"> @Loc["Previous"]</a>
+                <a asp-page="./UnloadsList" asp-route-culture="@AppCulture.Name" asp-route-pgidx="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled"> @Loc["Next"]</a>
+                <br />
+                <br />
+                <input type="submit" name="btnClose" class="btnOK" asp-page-handler="Close" style="float: right;" value=@Loc["Close"] tabindex="5">
+            </fieldset>
+            <footer>
+                <label>@Model.UnloadsListData.Text</label>
+            </footer>
+        </form>
+    </div>
+</div>

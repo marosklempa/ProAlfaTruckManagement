@@ -1,0 +1,67 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UnloadEditModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Pages/_Layout_UnloadEdit.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                @{
+                    var TitleText = Model.EditMode == "view" ? "Reservation" : "Delete reservation";
+                }
+                <label style="font-size: large; font-weight: bold">@Loc[TitleText]</label>
+                <br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>@Loc["Unload number"]</label>
+                                    <input type="number" asp-for="UnloadData.Rowid" tabindex="1" disabled>
+                                    <label>@Loc["Unload start"]</label>
+                                    <input type="text" asp-for="UnloadData.DateStart" tabindex="2" style="width: 115px" disabled>
+                                </div>
+                            </td>
+                            <td width="20px"></td>
+                            <td>
+                                <div>
+                                    <label>@Loc["Palette quantity"]</label>
+                                    <input type="number" asp-for="UnloadData.PalQnty" tabindex="3" disabled>
+                                    <label>@Loc["Unload end"]</label>
+                                    <input type="text" asp-for="UnloadData.DateEnd" tabindex="4" style="width: 115px" disabled>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label>@Loc["Ramp"]</label>
+                <input type="text" asp-for="UnloadData.Ramp" style="width: 275px" tabindex="5" disabled>
+                <label>@Loc["Remark"]</label>
+                <textarea asp-for="UnloadData.Remark" tabindex="6" style="width: 275px; height: 40px; resize:none" disabled></textarea>
+                <br />
+                @{
+                    var cancelHidden = Model.EditMode == "delete" ? "" : "hidden";
+                    var deleteHidden = Model.EditMode == "delete" ? "" : "hidden";
+                    var okHidden = Model.EditMode == "view" ? "" : "hidden";
+                }
+                <input type="submit" name="btnCancel" class="btnCancel @cancelHidden" asp-page-handler="Close" style="float: right;" value=@Loc["Cancel"] tabindex="9">
+                <input type="submit" name="btnDelete" class="btnOK @deleteHidden" asp-page-handler="Delete" style="float: right;" value=@Loc["Delete"] tabindex="8">
+                <input type="submit" name="btnClose" class="btnOK @okHidden" asp-page-handler="Close" style="float: right;" value=@Loc["Close"] tabindex="7">
+            </fieldset>
+            <footer>
+                <label>@Model.UnloadData.Text</label>
+            </footer>
+        </form>
+    </div>
+</div>

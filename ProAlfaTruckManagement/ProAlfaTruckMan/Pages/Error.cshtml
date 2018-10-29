@@ -1,0 +1,33 @@
+﻿@page
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@model ErrorModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Pages/_Layout_Error.cshtml";
+}
+@{
+    ViewData["Title"] = "Error";
+}
+
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST" >
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                <label>@Loc["Oops, something went wrong..."]</label>
+                <br />
+                <img src="~/images/error.jpg">
+                <label>@Model.ErrorMessage</label>
+                <br />
+            </fieldset>
+            <footer>
+                <input type="submit" name="btnlogin" class="btnLogin" asp-page-handler="OK" value=@Loc["Login again"] tabindex="4">
+            </footer>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model ReservationModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Pages/_Layout_Reservation.cshtml";
+}
+@{
+    ViewData["Title"] = @Loc["ProAlfa Truck Management"];
+}
+
+<div class="container parentbody-content">
+    <div class="container body-content">
+        <form class="box login" method="POST" onsubmit="btnOk.disabled=true; return true;">
+            <header>
+                <img src="~/images/vg_logo.png">
+            </header>
+            <fieldset class="boxBody">
+                <label style="font-size: large; font-weight: bold">@Loc["Reservation"]</label>
+                <br />
+                <label>@Loc["Unload date"]</label>
+                <input type="date" asp-for="ResData.Date" tabindex="1">
+                <span asp-validation-for="@Model.ResData.Date"></span>
+                <label>@Loc["Palette quantity"]</label>
+                <input type="number" asp-for="ResData.PalQnty" tabindex="2">
+                <span asp-validation-for="@Model.ResData.PalQnty"></span>
+                <label>@Loc["Remark"]</label>
+                <textarea asp-for="ResData.Remark" tabindex="3" style="width: 275px; height: 40px; resize:none"></textarea>
+                <span asp-validation-for="@Model.ResData.Remark"></span>
+                <span class="field-validation-error">@Model.ResData.ErrorMsg</span>
+                <br />
+                <br />
+                <input type="submit" name="btnCancel" class="btnCancel" asp-page-handler="Cancel" style="float: right;" value=@Loc["Cancel"] tabindex="5">
+                <input type="submit" name="btnOk" class="btnOK" asp-page-handler="OK" style="float: right;" value=@Loc["OK"] tabindex="4">
+            </fieldset>
+            <footer>
+                <label>@Model.ResData.Text</label>
+            </footer>
+        </form>
+    </div>
+</div>
